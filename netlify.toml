@@ -4,3 +4,10 @@
 
 [[plugins]]
   package = "netlify-plugin-cypress"
+
+[[redirects]]
+  from = "/functions/news"
+  to = "https://criticsbreakingnews.co.uk"
+  status = 301
+  force = true
+  query = { id = ":id" }

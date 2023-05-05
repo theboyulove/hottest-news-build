@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
   const featuredImageUrl = $('div.entry-content img').first().attr('data-src');
 
   // Replace the src attributes of all images with their corresponding data-src attributes
-  $('div.entry-content img').each((index, element) => {
+  $('img[data-src]').each((index, element) => {
     const dataSrc = $(element).attr('data-src');
     if (dataSrc) {
       $(element).attr('src', dataSrc).removeAttr('data-src').attr('loading', 'lazy');
@@ -32,7 +32,6 @@ exports.handler = async (event, context) => {
   // Format the HTML output using Prettier
   const formattedHtml = prettier.format(
     `
-      <!DOCTYPE html>
       <html>
         <head>
           <meta charset="UTF-8">
@@ -40,43 +39,47 @@ exports.handler = async (event, context) => {
           <title>${title}</title>
           <style>
             body {
+              background-color: #f2f2f2;
               margin: 0;
               padding: 0;
             }
-            .nav-bar {
-              background-color: #0077be;
+            .header {
+              background-color: #0072c6;
+              color: #fff;
+              padding: 10px;
               display: flex;
               justify-content: space-between;
-              align-items: center;
-              padding: 10px;
-              position: fixed;
-              top: 0;
-              left: 0;
-              right: 0;
             }
-            .nav-bar a {
-              color: white;
+            .header a {
+              color: #fff;
               font-weight: bold;
-              margin-right: 20px;
               text-decoration: none;
-              text-transform: uppercase;
+              margin-right: 20px;
             }
-            img {
+            .article {
+              width: 80%;
+              margin: 0 auto;
+              padding: 20px;
+              background-color: #fff;
+            }
+            .article img {
               max-width: 100%;
-              height: auto;
             }
           </style>
         </head>
         <body>
-          <div class="nav-bar">
-            <a href="#home">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
+          <div class="header">
+            <div>
+              <a href="#home">Home</a>
+              <a href="#news">News</a>
+              <a href="#contact">Contact</a>
+            </div>
+            
           </div>
-          <div style="margin-top: 60px;">
+          <div class="article">
             <h1>${title}</h1>
-            <img src="${featuredImageUrl}" loading="lazy">
-            <div class="entry-content">${articleContent}</div>
+            <img src="${featuredImageUrl}">
+            <div>${articleContent}</div>
           </div>
         </body>
       </html>

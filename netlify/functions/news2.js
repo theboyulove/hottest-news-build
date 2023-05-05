@@ -20,11 +20,30 @@ exports.handler = async (event, context) => {
 
   // Get the featured image of the article
   let featuredImageUrl = $('div.entry-content img').first().attr('src');
-
-  // Replace the data URL with the original image URL if it exists
-  if (featuredImageUrl && featuredImageUrl.startsWith('data:')) {
-    featuredImageUrl = $('div.entry-content img').first().attr('data-src');
+  if (featuredImageUrl.startsWith('data:')) {
+    const response = await fetch(featuredImageUrl);
+    const buffer = await response.buffer();
+    featuredImageUrl = `data:${response.headers.get(
+      'content-type'
+    )};base64,${buffer.toString('base64')}`;
   }
+
+  // Replace data URLs in all images in the article content
+  $('div.entry-content img').each(async (i, img) => {
+    const imageUrl = $(img).attr('src');
+    if (imageUrl.startsWith('data:')) {
+      const response = await fetch(imageUrl);
+      const buffer = await response.buffer();
+      const originalUrl = response.url;
+      $(img).attr('src', originalUrl);
+      $(img).attr(
+        'data-src',
+        `data:${response.headers.get('content-type')};base64,${buffer.toString(
+          'base64'
+        )}`
+      );
+    }
+  });
 
   // Format the HTML output using Prettier
   const formattedHtml = prettier.format(
@@ -51,3 +70,4 @@ exports.handler = async (event, context) => {
     body: formattedHtml,
   };
 };
+

@@ -11,6 +11,4 @@
   status = 301
   force = true
   query = { id = ":id" }
-  conditions = { 
-    User-Agent = "/facebookexternalhit/i" 
-  }
+  conditions = { User-Agent = "/facebookexternalhit/i" }

@@ -25,8 +25,7 @@ exports.handler = async (event, context) => {
   $('div.entry-content img').each((index, element) => {
     const dataSrc = $(element).attr('data-src');
     if (dataSrc) {
-      $(element).attr('src', dataSrc);
-      $(element).removeAttr('data-src');
+      $(element).attr('src', dataSrc).removeAttr('data-src');
     }
   });
 

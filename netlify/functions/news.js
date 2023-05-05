@@ -1,24 +1,25 @@
-const fetch = require('node-fetch');
-const { parse } = require('node-html-parser');
+const cheerio = require('cheerio');
 const prettier = require('prettier');
 
 exports.handler = async (event, context) => {
   const articleId = event.queryStringParameters.id;
   const articleUrl = `https://criticsbreakingnews.co.uk/?p=${articleId}`;
 
+  const { default: fetch } = await import('node-fetch');
+
   const response = await fetch(articleUrl);
   const html = await response.text();
-  const root = parse(html);
+
+  const $ = cheerio.load(html);
 
   // Get the title of the article
-  const title = root.querySelector('meta[property="og:title"]').getAttribute('content');
+  const title = $('h1.entry-title').text();
 
   // Get the main content of the article
-  const contentElements = root.querySelectorAll('.entry-content p');
-  const content = contentElements.map(el => el.toString()).join('\n');
+  const articleContent = $('div.entry-content').html();
 
   // Get the featured image of the article
-  const featuredImageUrl = root.querySelector('meta[property="og:image"]').getAttribute('content');
+  const featuredImageUrl = $('div.entry-content img').first().attr('src');
 
   // Format the HTML output using Prettier
   const formattedHtml = prettier.format(
@@ -30,7 +31,7 @@ exports.handler = async (event, context) => {
         <body>
           <h1>${title}</h1>
           <img src="${featuredImageUrl}">
-          ${content}
+          <div>${articleContent}</div>
         </body>
       </html>
     `,

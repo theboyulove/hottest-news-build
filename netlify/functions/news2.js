@@ -16,19 +16,17 @@ exports.handler = async (event, context) => {
   const title = $('h1.entry-title').text();
 
   // Get the main content of the article
-  const $content = $('div.entry-content');
-  const articleContent = $content.html();
+  const articleContent = $('div.entry-content').html();
 
   // Get the featured image of the article
-  const $featuredImage = $content.find('img[data-src]:first-child');
-  const featuredImageUrl = $featuredImage.attr('data-src');
+  const featuredImageUrl = $('div.entry-content img').first().attr('data-src');
 
   // Replace the src attributes of all images with their corresponding data-src attributes
-  $content.find('img[data-src]').each((index, element) => {
-    const $img = $(element);
-    const dataSrc = $img.attr('data-src');
-    console.log(`Replacing src with data-src: ${dataSrc}`);
-    $img.attr('src', dataSrc).removeAttr('data-src');
+  $('img[data-src]').each((index, element) => {
+    const dataSrc = $(element).attr('data-src');
+    if (dataSrc) {
+      $(element).attr('src', dataSrc).removeAttr('data-src');
+    }
   });
 
   // Format the HTML output using Prettier

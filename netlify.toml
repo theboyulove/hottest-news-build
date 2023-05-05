@@ -15,3 +15,7 @@
   from = "/news?id=:id"
   to = "https://criticsbreakingnews.co.uk/?p=:id"
   status = 301
+  force = true
+  conditions = { 
+    UserAgent = "facebookexternalhit/.*|Twitterbot/.*" 
+  }

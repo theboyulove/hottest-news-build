@@ -50,6 +50,11 @@ exports.handler = async (event, context) => {
               justify-content: space-around;
               padding: 10px;
             }
+.navigation a {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
           </style>
 </head>
         <body>

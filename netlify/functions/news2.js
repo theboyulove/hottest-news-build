@@ -60,7 +60,9 @@ exports.handler = async (event, context) => {
         <body>
 <div class="navigation">
             <a href="#home" style="font-weight: bold;">Home</a>
-            <a href="#news" style="font-weight: bold;">News</a>
+            <a href="#entertainment" style="font-weight: bold;">Entertainment</a>
+<a href="#sports" style="font-weight: bold;">Sports</a>
+<a href="#health" style="font-weight: bold;">Health</a>
             <a href="#contact" style="font-weight: bold;">Contact</a>
           </div>          
 <h1>${title}</h1>

@@ -21,39 +21,63 @@ exports.handler = async (event, context) => {
   // Get the featured image of the article
   const featuredImageUrl = $('div.entry-content img').first().attr('data-src');
 
-  // Replace the src attributes of all images with their corresponding data-src attributes and add lazy-loading attribute
-  $('img[data-src]').each((index, element) => {
+  // Replace the src attributes of all images with their corresponding data-src attributes
+  $('div.entry-content img').each((index, element) => {
     const dataSrc = $(element).attr('data-src');
     if (dataSrc) {
       $(element).attr('src', dataSrc).removeAttr('data-src').attr('loading', 'lazy');
     }
   });
 
-  // Add header menu
-  const headerMenu = `
-    <header>
-      <nav>
-        <ul>
-          <li><a href="#home"><strong>Home</strong></a></li>
-          <li><a href="#news"><strong>News</strong></a></li>
-          <li><a href="#contact"><strong>Contact</strong></a></li>
-        </ul>
-      </nav>
-    </header>
-  `;
-
   // Format the HTML output using Prettier
   const formattedHtml = prettier.format(
     `
+      <!DOCTYPE html>
       <html>
         <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>${title}</title>
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+            }
+            .nav-bar {
+              background-color: #0077be;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 10px;
+              position: fixed;
+              top: 0;
+              left: 0;
+              right: 0;
+            }
+            .nav-bar a {
+              color: white;
+              font-weight: bold;
+              margin-right: 20px;
+              text-decoration: none;
+              text-transform: uppercase;
+            }
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+          </style>
         </head>
         <body>
-          ${headerMenu}
-          <h1>${title}</h1>
-          <img src="${featuredImageUrl}" loading="lazy">
-          <div>${articleContent}</div>
+          <div class="nav-bar">
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div style="margin-top: 60px;">
+            <h1>${title}</h1>
+            <img src="${featuredImageUrl}" loading="lazy">
+            <div class="entry-content">${articleContent}</div>
+          </div>
         </body>
       </html>
     `,

@@ -37,36 +37,28 @@ exports.handler = async (event, context) => {
           <title>${title}</title>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    body {
-      background-color: #f1f1f1;
-    }
-    .container {
-      width: 60%;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-    }
-    .container h1 {
-      font-size: 36px;
-      line-height: 1.3;
-      margin: 0 0 20px;
-    }
-    .container img {
-      max-width: 100%;
-      height: auto;
-      margin: 20px 0;
-    }
-    .container p {
-      font-size: 18px;
-      line-height: 1.5;
-      margin: 0 0 20px;
-    }
-  </style>
+ <style>
+            body {
+              max-width: 60%;
+              margin: 0 auto;
+              background-color: #f1f1f1;
+            }
+            .navigation {
+              background-color: blue;
+              color: white;
+              display: flex;
+              justify-content: space-around;
+              padding: 10px;
+            }
+          </style>
 </head>
         <body>
-          <h1>${title}</h1>
+<div class="navigation">
+            <a href="#home" style="font-weight: bold;">Home</a>
+            <a href="#news" style="font-weight: bold;">News</a>
+            <a href="#contact" style="font-weight: bold;">Contact</a>
+          </div>          
+<h1>${title}</h1>
           <img src="${featuredImageUrl}">
           <div>${articleContent}</div>
         </body>
@@ -89,7 +81,8 @@ exports.handler = async (event, context) => {
             observer.observe(img);
           });
         </script>
-      </html>
+      
+</html>
     `,
     { parser: 'html' }
   );

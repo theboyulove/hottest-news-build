@@ -15,4 +15,3 @@
   from = "/news?id=:id"
   to = "https://criticsbreakingnews.co.uk/?p=:id"
   status = 301
-  condition = "${HTTP_REFERER =~ /lm.facebook.com|m.facebook.com|facebook.com|twitter.com/}"

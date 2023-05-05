@@ -21,13 +21,14 @@ exports.handler = async (event, context) => {
   // Get the featured image of the article
   const featuredImageUrl = $('div.entry-content img').first().attr('data-src');
 
-// Replace the src attributes of all images with their corresponding data-src attributes
-$('div.entry-content img').each((index, element) => {
-  const dataSrc = $(element).attr('data-src');
-  if (dataSrc) {
-    $(element).attr('src', dataSrc).removeAttr('data-src');
-  }
-});
+  // Replace the src attributes of all images with their corresponding data-src attributes
+  $('div.entry-content img').each((index, element) => {
+    const dataSrc = $(element).attr('data-src');
+    if (dataSrc) {
+      $(element).attr('src', dataSrc);
+      $(element).removeAttr('data-src');
+    }
+  });
 
   // Format the HTML output using Prettier
   const formattedHtml = prettier.format(

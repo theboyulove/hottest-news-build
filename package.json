@@ -8,6 +8,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "cypress": "^10.0.3",
     "next": "^12.1.5",
     "node-fetch": "^3.3.1",

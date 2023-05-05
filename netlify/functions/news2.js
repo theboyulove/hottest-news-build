@@ -37,7 +37,43 @@ exports.handler = async (event, context) => {
           <title>${title}</title>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        </head>
+<style>
+    body {
+      background-color: #f1f1f1;
+    }
+    .container {
+      width: 60%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    }
+    .container h1 {
+      font-size: 36px;
+      line-height: 1.3;
+      margin: 0 0 20px;
+    }
+    .container img {
+      max-width: 100%;
+      height: auto;
+      margin: 20px 0;
+    }
+    .container p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 0 0 20px;
+    }
+  </style>
+</head>
+This will set the width of the container to 60% and give it a light grey background color. It will also set the font size, line height, and margin for the heading and paragraphs to make them more condensed, and give some margin to the images.
+
+
+
+
+
+
+        
+</head>
         <body>
           <h1>${title}</h1>
           <img src="${featuredImageUrl}">

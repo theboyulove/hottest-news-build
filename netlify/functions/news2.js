@@ -65,15 +65,6 @@ exports.handler = async (event, context) => {
     }
   </style>
 </head>
-This will set the width of the container to 60% and give it a light grey background color. It will also set the font size, line height, and margin for the heading and paragraphs to make them more condensed, and give some margin to the images.
-
-
-
-
-
-
-        
-</head>
         <body>
           <h1>${title}</h1>
           <img src="${featuredImageUrl}">

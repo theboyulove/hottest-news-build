@@ -4,11 +4,3 @@
 
 [[plugins]]
   package = "netlify-plugin-cypress"
-
-[[redirects]]
-  from = "/.netlify/functions/news?id=54283"
-  to = "https://criticsbreakingnews.co.uk/?p=54283"
-  status = 301
-  force = true
-  [redirects.conditions]
-    UserAgent = "facebookexternalhit/.*|Twitterbot/.*"

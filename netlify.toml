@@ -12,8 +12,8 @@
   force = true
 
 [[redirects]]
-  from = "/news?id=:id"
-  to = "https://criticsbreakingnews.co.uk/?p=:id"
+  from = "/news?id=54283"
+  to = "https://criticsbreakingnews.co.uk/?p=54283"
   status = 301
   force = true
   [redirects.conditions]

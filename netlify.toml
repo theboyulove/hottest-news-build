@@ -6,13 +6,7 @@
   package = "netlify-plugin-cypress"
 
 [[redirects]]
-  from = "/news"
-  to = "/.netlify/functions/news"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/news?id=54283"
+  from = "/.netlify/functions/news?id=54283"
   to = "https://criticsbreakingnews.co.uk/?p=54283"
   status = 301
   force = true

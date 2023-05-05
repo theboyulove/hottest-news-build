@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
   const featuredImageUrl = $('div.entry-content img').first().attr('data-src');
 
   // Replace the src attributes of all images with their corresponding data-src attributes
-  $('img[data-src]').each((index, element) => {
+  $('div.entry-content img').each((index, element) => {
     const dataSrc = $(element).attr('data-src');
     if (dataSrc) {
       $(element).attr('src', dataSrc).removeAttr('data-src').attr('loading', 'lazy');
@@ -34,54 +34,34 @@ exports.handler = async (event, context) => {
     `
       <html>
         <head>
+          <title>${title}</title>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>${title}</title>
-          <style>
-            body {
-              background-color: #f2f2f2;
-              margin: 0;
-              padding: 0;
-            }
-            .header {
-              background-color: #0072c6;
-              color: #fff;
-              padding: 10px;
-              display: flex;
-              justify-content: space-between;
-            }
-            .header a {
-              color: #fff;
-              font-weight: bold;
-              text-decoration: none;
-              margin-right: 20px;
-            }
-            .article {
-              width: 80%;
-              margin: 0 auto;
-              padding: 20px;
-              background-color: #fff;
-            }
-            .article img {
-              max-width: 100%;
-            }
-          </style>
         </head>
         <body>
-          <div class="header">
-            <div>
-              <a href="#home">Home</a>
-              <a href="#news">News</a>
-              <a href="#contact">Contact</a>
-            </div>
-            
-          </div>
-          <div class="article">
-            <h1>${title}</h1>
-            <img src="${featuredImageUrl}">
-            <div>${articleContent}</div>
-          </div>
+          <h1>${title}</h1>
+          <img src="${featuredImageUrl}">
+          <div>${articleContent}</div>
         </body>
+        <script>
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const lazyImage = entry.target;
+                const dataSrc = lazyImage.getAttribute('data-src');
+                if (dataSrc) {
+                  lazyImage.setAttribute('src', dataSrc);
+                  lazyImage.removeAttribute('data-src');
+                  lazyImage.setAttribute('loading', 'lazy');
+                }
+                observer.unobserve(lazyImage);
+              }
+            });
+          });
+          document.querySelectorAll('img[data-src]').forEach((img) => {
+            observer.observe(img);
+          });
+        </script>
       </html>
     `,
     { parser: 'html' }

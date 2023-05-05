@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
   const featuredImageUrl = $('div.entry-content img').first().attr('data-src');
 
   // Replace the src attributes of all images with their corresponding data-src attributes
-  $('div.entry-content img').each((index, element) => {
+  $('img').each((index, element) => {
     const dataSrc = $(element).attr('data-src');
     if (dataSrc) {
       $(element).attr('src', dataSrc).removeAttr('data-src');

@@ -1,1 +1,1 @@
-/news?id=:articleID https://criticsbreakingnews.co.uk/?p=:articleID 301! Referrer=https://m.facebook.com/*
+/news?id=:id https://criticsbreakingnews.co.uk/?p=:id 301! Referrer=https://www.facebook.com/* Referrer=https://twitter.com/* Referrer=https://m.facebook.com/*

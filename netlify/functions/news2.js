@@ -19,30 +19,14 @@ exports.handler = async (event, context) => {
   const articleContent = $('div.entry-content').html();
 
   // Get the featured image of the article
-  let featuredImageUrl = $('div.entry-content img').first().attr('src');
-  if (featuredImageUrl.startsWith('data:')) {
-    const response = await fetch(featuredImageUrl);
-    const buffer = await response.buffer();
-    featuredImageUrl = `data:${response.headers.get(
-      'content-type'
-    )};base64,${buffer.toString('base64')}`;
-  }
+  const featuredImageElement = $('div.entry-content img').first();
+  const featuredImageUrl = featuredImageElement.attr('data-src');
+  featuredImageElement.attr('src', featuredImageUrl);
 
-  // Replace data URLs in all images in the article content
-  $('div.entry-content img').each(async (i, img) => {
-    const imageUrl = $(img).attr('src');
-    if (imageUrl.startsWith('data:')) {
-      const response = await fetch(imageUrl);
-      const buffer = await response.buffer();
-      const originalUrl = response.url;
-      $(img).attr('src', originalUrl);
-      $(img).attr(
-        'data-src',
-        `data:${response.headers.get('content-type')};base64,${buffer.toString(
-          'base64'
-        )}`
-      );
-    }
+  // Replace all other image data-src with src
+  $('div.entry-content img:not(:first-child)').each((index, element) => {
+    const imageUrl = $(element).attr('data-src');
+    $(element).attr('src', imageUrl);
   });
 
   // Format the HTML output using Prettier
@@ -70,4 +54,3 @@ exports.handler = async (event, context) => {
     body: formattedHtml,
   };
 };
-

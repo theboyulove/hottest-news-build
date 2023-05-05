@@ -6,10 +6,15 @@
   package = "netlify-plugin-cypress"
 
 [[redirects]]
+  from = "/.netlify/functions/news?id=:id"
+  to = "/news?id=:id"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/news?id=:id"
   to = "https://aubtu.biz/:id"
   status = 301
   force = true
   query = { id = ":id" }
-  [[redirects.conditions]]
-    Referrer = "/.*\.facebook\.com\/.*/i"
+  conditions = { Referrer =~ "/.*\.facebook\.com\/.*/i" }

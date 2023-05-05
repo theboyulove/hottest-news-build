@@ -4,10 +4,4 @@
 
 [[plugins]]
   package = "netlify-plugin-cypress"
-
-[[redirects]]
-  from = "/demo/article"
-  to = "https://aubtu.biz/"
-  status = 301
-  force = true
   

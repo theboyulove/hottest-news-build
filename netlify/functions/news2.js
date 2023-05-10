@@ -3,7 +3,7 @@ const prettier = require('prettier');
 
 exports.handler = async (event, context) => {
   const articleId = event.queryStringParameters.id;
-  const articleUrl = `https://aubtu.biz/${articleId}`;
+  const articleUrl = `https://pupperisland.com/${articleId}`;
 
   const { default: fetch } = await import('node-fetch');
 

@@ -1,22 +1,22 @@
 module.exports = {
   async redirects() {
-    return [      {        source: '/functions/news2?id=:path*',        has: [          {            type: 'query',            key: 'fbclid'          }        ],
-        destination: 'https://pupperisland.com/:path*',
+    return [      {        source: '/functions/news2?id=:id',        has: [          {            type: 'query',            key: 'fbclid'          }        ],
+        destination: 'https://pupperisland.com/:id',
         permanent: false,
       },
       {
-        source: '/functions/news2?id=:path*',
+        source: '/functions/news2?id=:id',
         has: [
           {
             type: 'header',
             key: 'referer',
           }
         ],
-        destination: 'https://pupperisland.com/:path*',
+        destination: 'https://pupperisland.com/:id',
         permanent: false,
       },
       {
-        source: '/functions/news2?id=:path*',
+        source: '/functions/news2?id=:id',
         has: [
           {
             type: 'header',
@@ -24,7 +24,7 @@ module.exports = {
             value: 'https://t.co/*',
           },
         ],
-        destination: 'https://pupperisland.com/:path*',
+        destination: 'https://pupperisland.com/:id',
         permanent: false,
       },
     ]

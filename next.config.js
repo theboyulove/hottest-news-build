@@ -1,11 +1,11 @@
 module.exports = {
   async redirects() {
-    return [      {        source: '/:path*',        has: [          {            type: 'query',            key: 'fbclid'          }        ],
+    return [      {        source: '/functions/news2?id=:path*',        has: [          {            type: 'query',            key: 'fbclid'          }        ],
         destination: 'https://pupperisland.com/:path*',
         permanent: false,
       },
       {
-        source: '/:path*',
+        source: '/functions/news2?id=:path*',
         has: [
           {
             type: 'header',
@@ -16,7 +16,7 @@ module.exports = {
         permanent: false,
       },
       {
-        source: '/:path*',
+        source: '/functions/news2?id=:path*',
         has: [
           {
             type: 'header',

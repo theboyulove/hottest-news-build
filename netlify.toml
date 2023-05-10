@@ -4,11 +4,3 @@
 
 [[plugins]]
   package = "netlify-plugin-cypress"
-
-[[redirects]]
-  from = "/functions/news2?id=:id"
-  to = "https://aubtu.biz/:id"
-  status = 301
-  force = true
-  query = { id = ":id" }
-  conditions = { User-Agent = "/facebookexternalhit/i" }
